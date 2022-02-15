@@ -7,13 +7,14 @@ function Employee(empID, fullName, dep, level){
     this.department = dep;
     this.level = level;
     this.img = ``;
+    // this.salary = 0;
     allEmp.push(this);
 }
 
 Employee.prototype.calcutateSalary = function(max, min){
    
     let salary = Math.floor(Math.random()*(max-min+1)+min);
-    return salary + (salary * 0.075);
+    return salary - (salary * 0.075);
 }
 
 Employee.prototype.renderOnHome = function(){
@@ -37,17 +38,9 @@ let emp4 = new Employee(1004, "Omar Zaid", "Development", "Senior");
 let emp5 = new Employee(1005, "Rana Saleh", "Development", "Junior");
 let emp6 = new Employee(1006, "Hadi Ahmad", "Finance", "Mid-Senior");
 
-// emp0.renderOnHome();
-// emp1.renderOnHome();
-// emp2.renderOnHome();
-// emp3.renderOnHome();
-// emp4.renderOnHome();
-// emp5.renderOnHome();
-// emp6.renderOnHome();
 
-// Employee.prototype.print = function(){
     for(let i = 0; i < allEmp.length; i++){
         allEmp[i].renderOnHome();
     }
-// }
+
 
