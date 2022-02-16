@@ -1,22 +1,23 @@
 "use strict";
 
 let allEmp = [];
+let id = 1000;
 
-
-function Employee(fullName, dep, level, img, salary, id) {
-    this.employeeID = id; //random
+function Employee(fullName, dep, level, imgUrl) {
+    this.employeeID = 0; //random
     this.fullName = fullName;
     this.department = dep;
     this.level = level;
-    this.img = img;
-    this.salary = salary; //random
+    this.imgUrl = imgUrl;
+    this.salary = 0; //random
 
     allEmp.push(this);
 }
 
-Employee.prototype.calcutateSalary = function () {
+Employee.prototype.assignSalary = function () {
     let min = 0;
     let max = 0;
+    let netSalary = 0;
 
     if (this.level === "Junior") {
         max = 1000;
@@ -31,16 +32,12 @@ Employee.prototype.calcutateSalary = function () {
         min = 1500;
     }
     let salary = Math.floor(Math.random() * (max - min + 1) + min);
-    return salary - (salary * 0.075);
+    netSalary = salary - (salary * 0.075);
+    this.salary = netSalary;
 }
 
 let empInfo = document.getElementById("empInfo");
-let nameDiv = document.getElementById("nameDiv");
-let levelDiv = document.getElementById("levelDiv");
-let imgDiv = document.getElementById("imgDiv");
-let depDiv = document.getElementById("depDiv");
-let salaryDiv = document.getElementById("salaryDiv")
-let idDiv = document.getElementById("idDiv");
+
 
 Employee.prototype.renderOnHome = function () {
 
@@ -65,7 +62,7 @@ Employee.prototype.renderOnHome = function () {
 
 
     let img = document.createElement("img");
-    img.setAttribute("src", this.img);
+    img.setAttribute("src", this.imgUrl);
     img.style.width = "100px";
     container.appendChild(img);
 
@@ -84,11 +81,13 @@ Employee.prototype.renderOnHome = function () {
     empInfo.appendChild(container);
 
 }
+function generateId(){
+    
+    return id++;
+}
+Employee.prototype.uniqueID = function () {
 
-Employee.prototype.randomID = function () {
-
-    let random = Math.floor(1000 + Math.random() * 9000);
-    return random;
+    this.employeeID = generateId();
 }
 
 let form = document.getElementById("form");
@@ -105,35 +104,37 @@ function submitHandler(event) {
 
     let newEmp = new Employee(fullName, dep, level, imgUrl);
 
-    newEmp.salary = newEmp.calcutateSalary();
-    newEmp.employeeID = newEmp.randomID();
+    newEmp.assignSalary();
+    newEmp.uniqueID();
 
     
     console.log(fullName);
     console.log(level);
     console.log(dep);
-    console.log(newEmp.calcutateSalary());
+    console.log(newEmp.assignSalary());
     console.log(newEmp);
     renderAll();
     form.reset();
 
 }
-// let emp0 = new Employee(1000, "Ghazi Samer", "Administration", "Senior");
-// let emp1 = new Employee(1001, "Lana Ali", "Finance", "Senior");
-// let emp2 = new Employee(1002, "Tamara Ayoub", "Marketing", "Senior");
-// let emp3 = new Employee(1003, "Safi Walid", "Administration", "Mid-Senior");
-// let emp4 = new Employee(1004, "Omar Zaid", "Development", "Senior");
-// let emp5 = new Employee(1005, "Rana Saleh", "Development", "Junior");
-// let emp6 = new Employee(1006, "Hadi Ahmad", "Finance", "Mid-Senior");
+let emp0 = new Employee( "Ghazi-Samer", "Administration", "Senior", "/assets/Ghazi-Samer.jpg");
+let emp1 = new Employee("Lana-Ali", "Finance", "Senior", `/assets/Lana-Ali.jpg`);
+let emp2 = new Employee( "Tamara-Ayoub", "Marketing", "Senior", `/assets/Tamara-Ayoub.jpg`);
+let emp3 = new Employee( "Safi-Walid", "Administration", "Mid-Senior", `/assets/Safi-Walid.jpg`);
+let emp4 = new Employee( "Omar-Zaid", "Development", "Senior", `/assets/Omar-Zaid.jpg`);
+let emp5 = new Employee( "Rana-Saleh", "Development", "Junior", `/assets/Rana-Saleh.jpg`);
+let emp6 = new Employee( "Hadi-Ahmad", "Finance", "Mid-Senior", `/assets/Hadi-Ahmad.jpg`);
 
+
+//
 function renderAll() {
     empInfo.innerHTML = "";
     for (let i = 0; i < allEmp.length; i++) {
-        allEmp[i].calcutateSalary();
-        allEmp[i].randomID();
+        allEmp[i].assignSalary();
+        allEmp[i].uniqueID();
         allEmp[i].renderOnHome();
     }
+    console.log(allEmp);
 }
 renderAll();
-
-
+console.log(allEmp);
