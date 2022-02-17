@@ -76,3 +76,8 @@ footer div {
     margin-top: 50px;
 
 }
+
+#tableDiv, tr, th, td{
+    border: solid;
+    padding: 10px;
+}
