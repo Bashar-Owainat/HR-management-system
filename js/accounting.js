@@ -1,10 +1,10 @@
 'use strict';
-document.writeln("<script src=js/app.js'></script>");
+// document.writeln("<script src=js/app.js'></script>");
 let tableDiv = document.getElementById("tableDiv");
 
 let arrOfEmp = JSON.parse(localStorage.getItem("allEmp"));
 
-console.log(arrOfEmp);
+// console.log(arrOfEmp);
 function createHeader() {
     let tr = document.createElement("tr");
     tableDiv.appendChild(tr);
