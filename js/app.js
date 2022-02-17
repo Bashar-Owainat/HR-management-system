@@ -43,48 +43,57 @@ let empInfo = document.getElementById("empInfo");
 
 Employee.prototype.renderOnHome = function () {
 
-    
+
     let container = document.createElement("div");
     container.style.border = "solid";
+    container.style.borderRadius = "25%";
+    container.style.backgroundColor = "#00B4D8";
+    container.style.textAlign = "center";
+    container.style.display = "inline-block";
+    container.style.margin = "13px";
 
+    let img = document.createElement("img");
+    img.setAttribute("src", this.imgUrl);
+    img.style.width = "350px";
+    img.style.height = "350px";
+    img.style.borderRadius = "35%"
 
-    let fullName = document.createElement("p");
+    container.appendChild(img);
+
+    let fullName = document.createElement("h3");
     fullName.textContent = `Name: ${this.fullName}`;
     container.appendChild(fullName);
 
 
-    let level = document.createElement("p");
+    let level = document.createElement("h3");
     level.textContent = `Level: ${this.level}`;
     container.appendChild(level);
 
 
-    let dep = document.createElement("p");
+    let dep = document.createElement("h3");
     dep.textContent = `Department: ${this.department}`;
     container.appendChild(dep);
 
 
-    let img = document.createElement("img");
-    img.setAttribute("src", this.imgUrl);
-    img.style.width = "100px";
-    container.appendChild(img);
 
 
-
-    let salary = document.createElement("p");
+    let salary = document.createElement("h3");
     salary.textContent = `Salary: ${this.salary}`;
     container.appendChild(salary);
 
 
-    let id = document.createElement("p");
+    let id = document.createElement("h3");
     id.textContent = `ID: ${this.employeeID}`;
-   
+
     container.appendChild(id);
 
     empInfo.appendChild(container);
 
+
+
 }
-function generateId(){
-    
+function generateId() {
+
     return id++;
 }
 Employee.prototype.uniqueID = function () {
@@ -94,25 +103,29 @@ Employee.prototype.uniqueID = function () {
 
 
 
-function saveEmp(){
+function saveEmp() {
     let formattedData = JSON.stringify(allEmp);
-    localStorage.setItem("allEmp",formattedData);
+    localStorage.setItem("allEmps", formattedData);
 }
 
-function getEmp(){
-    let allEmp = localStorage.getItem("allEmp");
-    let parseEmp = JSON.parse(allEmp);
+function getEmp() {
+    let getAllEmps = localStorage.getItem("allEmps");
+    let parseEmp = JSON.parse(getAllEmps);
 
-    allEmp = [];
+    console.log(allEmp);
+    console.log(parseEmp);
 
-    if(parseEmp != null){
-       
-        for(let i = 0; i < parseEmp.length; i++){
+      if (parseEmp != null) {
+        allEmp = [];
+        console.log(allEmp)
+        for (let i = 0; i < parseEmp.length; i++) {
             new Employee(parseEmp[i].fullName, parseEmp[i].dep, parseEmp[i].level, parseEmp[i].imgUrl);
 
         }
-    }
+     }
     renderAll();
+    console.log(allEmp);
+
 }
 
 
@@ -133,27 +146,20 @@ function submitHandler(event) {
     newEmp.assignSalary();
     newEmp.uniqueID();
 
-    
-    // console.log(fullName);
-    // console.log(level);
-    // console.log(dep);
-    // console.log(newEmp.assignSalary());
-    // console.log(newEmp);
-   
-    // form.reset();
 
+    console.log(allEmp)
     renderAll();
     saveEmp();
 
 
 }
-let emp0 = new Employee( "Ghazi-Samer", "Administration", "Senior", "/assets/Ghazi-Samer.jpg");
+let emp0 = new Employee("Ghazi-Samer", "Administration", "Senior", "/assets/Ghazi-Samer.jpg");
 let emp1 = new Employee("Lana-Ali", "Finance", "Senior", `/assets/Lana-Ali.jpg`);
-let emp2 = new Employee( "Tamara-Ayoub", "Marketing", "Senior", `/assets/Tamara-Ayoub.jpg`);
-let emp3 = new Employee( "Safi-Walid", "Administration", "Mid-Senior", `/assets/Safi-Walid.jpg`);
-let emp4 = new Employee( "Omar-Zaid", "Development", "Senior", `/assets/Omar-Zaid.jpg`);
-let emp5 = new Employee( "Rana-Saleh", "Development", "Junior", `/assets/Rana-Saleh.jpg`);
-let emp6 = new Employee( "Hadi-Ahmad", "Finance", "Mid-Senior", `/assets/Hadi-Ahmad.jpg`);
+let emp2 = new Employee("Tamara-Ayoub", "Marketing", "Senior", `/assets/Tamara-Ayoub.jpg`);
+let emp3 = new Employee("Safi-Walid", "Administration", "Mid-Senior", `/assets/Safi-Walid.jpg`);
+let emp4 = new Employee("Omar-Zaid", "Development", "Senior", `/assets/Omar-Zaid.jpg`);
+let emp5 = new Employee("Rana-Saleh", "Development", "Junior", `/assets/Rana-Saleh.jpg`);
+let emp6 = new Employee("Hadi-Ahmad", "Finance", "Mid-Senior", `/assets/Hadi-Ahmad.jpg`);
 
 
 //
@@ -166,10 +172,9 @@ function renderAll() {
         allEmp[i].uniqueID();
         allEmp[i].renderOnHome();
     }
-    console.log(allEmp);
+    
 }
 
-console.log(allEmp);
 
 
 renderAll();
