@@ -1,4 +1,5 @@
 "use strict";
+document.writeln("<script type='text/javascript' src='/js/accounting.js'></script>");
 
 let allEmp = [];
 let id = 1000;
@@ -10,6 +11,7 @@ function Employee(fullName, dep, level, imgUrl) {
     this.level = level;
     this.imgUrl = imgUrl;
     this.salary = 0; //random
+    this.numOfEmp = 0;
 
     allEmp.push(this);
 }
@@ -90,6 +92,30 @@ Employee.prototype.uniqueID = function () {
     this.employeeID = generateId();
 }
 
+
+
+function saveEmp(){
+    let formattedData = JSON.stringify(allEmp);
+    localStorage.setItem("allEmp",formattedData);
+}
+
+function getEmp(){
+    let allEmp = localStorage.getItem("allEmp");
+    let parseEmp = JSON.parse(allEmp);
+
+    allEmp = [];
+
+    if(parseEmp != null){
+       
+        for(let i = 0; i < parseEmp.length; i++){
+            new Employee(parseEmp[i].fullName, parseEmp[i].dep, parseEmp[i].level, parseEmp[i].imgUrl);
+
+        }
+    }
+    renderAll();
+}
+
+
 let form = document.getElementById("form");
 form.addEventListener("submit", submitHandler);
 
@@ -108,13 +134,17 @@ function submitHandler(event) {
     newEmp.uniqueID();
 
     
-    console.log(fullName);
-    console.log(level);
-    console.log(dep);
-    console.log(newEmp.assignSalary());
-    console.log(newEmp);
+    // console.log(fullName);
+    // console.log(level);
+    // console.log(dep);
+    // console.log(newEmp.assignSalary());
+    // console.log(newEmp);
+   
+    // form.reset();
+
     renderAll();
-    form.reset();
+    saveEmp();
+
 
 }
 let emp0 = new Employee( "Ghazi-Samer", "Administration", "Senior", "/assets/Ghazi-Samer.jpg");
@@ -128,7 +158,9 @@ let emp6 = new Employee( "Hadi-Ahmad", "Finance", "Mid-Senior", `/assets/Hadi-Ah
 
 //
 function renderAll() {
+
     empInfo.innerHTML = "";
+
     for (let i = 0; i < allEmp.length; i++) {
         allEmp[i].assignSalary();
         allEmp[i].uniqueID();
@@ -136,5 +168,9 @@ function renderAll() {
     }
     console.log(allEmp);
 }
-renderAll();
+
 console.log(allEmp);
+
+
+renderAll();
+getEmp();
