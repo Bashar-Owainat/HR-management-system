@@ -2,7 +2,7 @@
 // document.writeln("<script src=js/app.js'></script>");
 let tableDiv = document.getElementById("tableDiv");
 
-let arrOfEmp = JSON.parse(localStorage.getItem("allEmp"));
+let arrOfEmp = JSON.parse(localStorage.getItem("allEmps"));
 
 // console.log(arrOfEmp);
 function createHeader() {
@@ -28,7 +28,7 @@ function createHeader() {
 }
 createHeader();
 
-function createBoby() {
+function createBody() {
     let empsInDevelopment = 0;
     let deveSalary = 0;
     let empsInAdministration = 0;
@@ -130,4 +130,4 @@ function createBoby() {
 
 
 }
-createBoby();
+createBody();
