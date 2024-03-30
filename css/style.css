@@ -47,6 +47,19 @@ footer {
    display: inline-block;
 
 }
+#empInfo div{
+border: solid;
+border-radius: 25%;
+background-color: #00B4D8;
+text-align: center;
+display: inline-block;
+margin: 13px;
+}
+
+#empInfo div img{
+    width: 250px;
+    border-radius: 40% ;
+}
 
 footer div {
 

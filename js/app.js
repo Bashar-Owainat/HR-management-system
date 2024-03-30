@@ -45,18 +45,10 @@ Employee.prototype.renderOnHome = function () {
 
 
     let container = document.createElement("div");
-    container.style.border = "solid";
-    container.style.borderRadius = "25%";
-    container.style.backgroundColor = "#00B4D8";
-    container.style.textAlign = "center";
-    container.style.display = "inline-block";
-    container.style.margin = "13px";
+
 
     let img = document.createElement("img");
     img.setAttribute("src", this.imgUrl);
-    img.style.width = "350px";
-    img.style.height = "350px";
-    img.style.borderRadius = "35%"
 
     container.appendChild(img);
 
